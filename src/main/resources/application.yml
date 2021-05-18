@@ -1,0 +1,62 @@
+logging:
+  level:
+    com.azure.storage : INFO
+    org.springframework: INFO
+    org.thymeleaf: INFO
+server:
+  port: 8080
+spring:
+  devtools:
+    add-properties: true
+  thymeleaf:
+    cache: false
+  security:
+    oauth2:
+      client:
+        registration:
+          # Azure Active Directory
+          azuread:
+            clientId: f33284c5-faf4-474f-aae4-4476b16a435b
+            clientSecret: S7rRUVt8_YJw3nTvUyj_RaFnTu9G-U08V~
+            client-name: demo10
+            scope:
+              - profile
+            client-authentication-method: post
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:8080/login/oauth2/code/azuread
+          # B2C
+          azureadb2c:
+            client-id: 386fb615-424a-4a7a-bba4-e6901838fc75
+            client-secret : k~BnqeId4PAX_J._8Ay3kwG9nM3za~Ko73
+            client-name: Azure Active Directory B2C
+            scope:
+              - openid
+              - 386fb615-424a-4a7a-bba4-e6901838fc75
+            client-authentication-method: post
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:8080/login/oauth2/code/azureadb2c
+          c001:
+            clientId: a4e5ed3d-7b46-4776-81e3-4e304e7139ec
+            clientSecret: wmk7D.viPU14m0pmxV.Y4jrd_a19-GZY-E
+            client-name: DEMO11_KIMO
+            scope:
+              - profile
+            client-authentication-method: post
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:8080/login/oauth2/code/azuread
+        provider:
+          azuread:
+            token-uri: https://login.microsoftonline.com/13b36217-2bc0-47d2-b356-8c5a3bbfd3ed/oauth2/token
+            authorization-uri: https://login.microsoftonline.com/13b36217-2bc0-47d2-b356-8c5a3bbfd3ed/oauth2/authorize
+            user-info-uri: https://graph.windows.net/me?api-version=1.6
+            user-name-attribute: displayName
+          azureadb2c:
+            token-uri: https://<<b2c tenant name>>.b2clogin.com/morisb2c.onmicrosoft.com/dummy/oauth2/v2.0/token
+            authorization-uri: https://13b36217-2bc0-47d2-b356-8c5a3bbfd3ed.b2clogin.com/morisb2c.onmicrosoft.com/dummy/oauth2/v2.0/authorize
+            user-name-attribute: name
+            jwk-set-uri: https://13b36217-2bc0-47d2-b356-8c5a3bbfd3ed.b2clogin.com/morisb2c.onmicrosoft.com/dummy/discovery/v2.0/keys
+          c001:
+            token-uri: https://login.microsoftonline.com/c00691d6-813d-4c92-8352-5cc758c63de2/oauth2/token
+            authorization-uri: https://login.microsoftonline.com/c00691d6-813d-4c92-8352-5cc758c63de2/oauth2/authorize
+            user-info-uri: https://graph.windows.net/me?api-version=1.6
+            user-name-attribute: displayName

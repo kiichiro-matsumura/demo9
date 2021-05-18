@@ -1,42 +1,29 @@
 package com.kaidanouji19840218.demo9.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
-import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class HomeController {
-    @Autowired
-    private OAuth2AuthorizedClientService authorizedClientService;
 
-    @GetMapping("group1")
-    @ResponseBody
-    @PreAuthorize("hasRole('ROLE_group1')")
-    public String group1() {
-        return "group1 message";
+    @GetMapping("/test/user")
+    public String login() {
+        return "login";
+    }
+    @GetMapping("/login/operation")
+    public String index(final Model model, final OAuth2AuthenticationToken token) {
+        return "index";
     }
 
-    @GetMapping("group2")
-    @ResponseBody
-    @PreAuthorize("hasRole('ROLE_group2')")
-    public String group2() {
-        return "group2 message";
+    @GetMapping("/login/c001")
+    public String c001(final Model model, final OAuth2AuthenticationToken token) {
+        return "index";
     }
 
-    @GetMapping("/")
-    public String index(Model model, OAuth2AuthenticationToken authentication) {
-        final OAuth2AuthorizedClient authorizedClient =
-                this.authorizedClientService.loadAuthorizedClient(
-                        authentication.getAuthorizedClientRegistrationId(),
-                        authentication.getName());
-        model.addAttribute("userName", authentication.getName());
-        model.addAttribute("clientName", authorizedClient.getClientRegistration().getClientName());
+    @GetMapping("/home")
+    public String home(final Model model, final OAuth2AuthenticationToken token) {
         return "index";
     }
 }
